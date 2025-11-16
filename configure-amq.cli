@@ -1,0 +1,3 @@
+# Add a resource adapter to the remote broker with the 'enable-amq1-prefix' set to false (since we are not connecting to a legacy broker).
+/subsystem=messaging-activemq/pooled-connection-factory=activemq-ra:remove
+/subsystem=messaging-activemq/pooled-connection-factory=activemq-ra:add(connectors=[artemis],entries=[java:/JmsXA,java:jboss/DefaultJMSConnectionFactory],enable-amq1-prefix=false, user=${env.JBOSS_MESSAGING_CONNECTOR_USER}, password=${env.JBOSS_MESSAGING_CONNECTOR_PASSWORD})
