@@ -14,10 +14,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @MessageDriven(name = "HelloWorldQueueMDB", activationConfig = {
-        @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "queue/HELLOWORLDMDBQueue"),
+        @ActivationConfigProperty(propertyName = "useJNDI", propertyValue = "false"),
+        @ActivationConfigProperty(propertyName = "destination", propertyValue = "mdb.from.queue.01"),
         @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "jakarta.jms.Queue"),
         @ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge"),
-        @ActivationConfigProperty(propertyName = "maxSession", propertyValue = "15"),
+        @ActivationConfigProperty(propertyName = "maxSession", propertyValue = "10"),
         @ActivationConfigProperty(propertyName = "singleConnection", propertyValue = "true")
 })
 public class HelloWorld implements MessageListener {
