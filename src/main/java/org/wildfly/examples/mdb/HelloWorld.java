@@ -7,11 +7,9 @@ import jakarta.jms.JMSException;
 import jakarta.jms.Message;
 import jakarta.jms.MessageListener;
 import jakarta.jms.TextMessage;
+import lombok.extern.slf4j.Slf4j;
 import org.wildfly.examples.producer.Producer;
 import org.wildfly.examples.repository.PersonRepository;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @MessageDriven(name = "HelloWorldQueueMDB", activationConfig = {
         @ActivationConfigProperty(propertyName = "useJNDI", propertyValue = "false"),
@@ -21,8 +19,8 @@ import java.util.logging.Logger;
         @ActivationConfigProperty(propertyName = "maxSession", propertyValue = "10"),
         @ActivationConfigProperty(propertyName = "singleConnection", propertyValue = "true")
 })
+@Slf4j
 public class HelloWorld implements MessageListener {
-    private static final Logger LOGGER = Logger.getLogger(HelloWorld.class.toString());
 
     @EJB
     PersonRepository personRepository;
@@ -38,12 +36,12 @@ public class HelloWorld implements MessageListener {
         try {
             if (rcvMessage instanceof TextMessage) {
                 msg = (TextMessage) rcvMessage;
-                LOGGER.log(Level.INFO, "Received Message from queue: {0}", msg.getText());
+                log.info("Received Message from queue: {}", msg.getText());
                 personRepository.createPerson(msg.getText(), msg.getText());
                 producer.sendMessage(msg.getText(), "mdb.queue.01");
                 //throw new RuntimeException("Should not reach here");
             } else {
-                LOGGER.warning("Message of wrong type: " + rcvMessage.getClass().getName());
+                log.warn("Message of wrong type: {}", rcvMessage.getClass().getName());
             }
         } catch (JMSException e) {
             throw new RuntimeException(e);
