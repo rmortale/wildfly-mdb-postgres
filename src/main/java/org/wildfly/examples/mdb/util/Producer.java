@@ -1,4 +1,4 @@
-package org.wildfly.examples.producer;
+package org.wildfly.examples.mdb.util;
 
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
