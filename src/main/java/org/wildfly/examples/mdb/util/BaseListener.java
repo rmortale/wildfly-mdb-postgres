@@ -20,7 +20,7 @@ public abstract class BaseListener implements MessageListener {
         try {
             log.debug("Received JMS message with id: {}", message.getJMSMessageID());
             if (message instanceof TextMessage) {
-                process(getTextMessage(message));
+                process(convertToStringMessage(message));
             } else {
                 log.warn("Message of wrong type: {}", message.getClass().getName());
             }
@@ -29,7 +29,7 @@ public abstract class BaseListener implements MessageListener {
         }
     }
 
-    private StringMessage getTextMessage(Message m) throws JMSException {
+    private StringMessage convertToStringMessage(Message m) throws JMSException {
         return StringMessage.builder()
                 .messageId(m.getJMSMessageID())
                 .body(((TextMessage) m).getText())

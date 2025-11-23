@@ -5,21 +5,19 @@ import jakarta.ejb.Stateless;
 import lombok.extern.slf4j.Slf4j;
 import org.wildfly.examples.mdb.util.Producer;
 import org.wildfly.examples.mdb.util.StringMessage;
-import org.wildfly.examples.mdb.util.StringMessageProcessor;
 import org.wildfly.examples.repository.PersonRepository;
 
 import java.util.Map;
 
 @Stateless
 @Slf4j
-public class FlowProcessor implements StringMessageProcessor {
+public class FlowProcessor {
 
     @EJB
     PersonRepository personRepository;
     @EJB
     Producer producer;
 
-    @Override
     public void processMessage(StringMessage message) {
         log.info("Processing Message {}", message);
         personRepository.createPerson(message.getMessageId(), message.getBody());

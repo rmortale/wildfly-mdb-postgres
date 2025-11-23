@@ -4,9 +4,9 @@ import jakarta.ejb.ActivationConfigProperty;
 import jakarta.ejb.EJB;
 import jakarta.ejb.MessageDriven;
 import lombok.extern.slf4j.Slf4j;
+import org.wildfly.examples.flow.FlowProcessor;
 import org.wildfly.examples.mdb.util.BaseListener;
 import org.wildfly.examples.mdb.util.StringMessage;
-import org.wildfly.examples.mdb.util.StringMessageProcessor;
 
 @MessageDriven(activationConfig = {
         @ActivationConfigProperty(propertyName = "useJNDI", propertyValue = "false"),
@@ -20,12 +20,10 @@ import org.wildfly.examples.mdb.util.StringMessageProcessor;
 public class SampleMdb extends BaseListener {
 
     @EJB
-    StringMessageProcessor messageProcessor;
-
+    FlowProcessor messageProcessor;
 
     @Override
     public void process(StringMessage message) {
-        log.info("Received message: {}", message);
         messageProcessor.processMessage(message);
     }
 }
