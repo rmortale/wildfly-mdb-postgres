@@ -13,7 +13,9 @@ import java.util.Map;
 @Slf4j
 public abstract class BaseListener implements MessageListener {
 
-    public abstract void process(StringMessage message);
+    public abstract void onError(Message message, Exception exception);
+
+    public abstract void process(StringMessage message) throws AbortException;
 
     @Override
     public void onMessage(Message message) {
@@ -26,6 +28,8 @@ public abstract class BaseListener implements MessageListener {
             }
         } catch (JMSException e) {
             throw new RuntimeException(e);
+        } catch (AbortException e) {
+            onError(message, e);
         }
     }
 
