@@ -23,7 +23,7 @@ public class FlowProcessor implements StringMessageProcessor {
     public void processMessage(StringMessage message) {
         log.info("Processing Message {}", message);
         personRepository.createPerson(message.getMessageId(), message.getBody());
-        producer.sendMessageWithProps(message.getMessageId(), "producer.queue.01", Map.of("hello", "world"));
+        producer.sendMessageWithProps(message.getBody(), "producer.queue.01", Map.of("hello", "world"));
         //throw new NullPointerException("Message is null");
     }
 }

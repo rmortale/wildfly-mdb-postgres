@@ -3,10 +3,9 @@ package org.wildfly.examples.mdb;
 import jakarta.ejb.ActivationConfigProperty;
 import jakarta.ejb.EJB;
 import jakarta.ejb.MessageDriven;
-import jakarta.jms.Message;
-import jakarta.jms.MessageListener;
 import lombok.extern.slf4j.Slf4j;
 import org.wildfly.examples.mdb.util.BaseListener;
+import org.wildfly.examples.mdb.util.StringMessage;
 import org.wildfly.examples.mdb.util.StringMessageProcessor;
 
 @MessageDriven(activationConfig = {
@@ -18,14 +17,15 @@ import org.wildfly.examples.mdb.util.StringMessageProcessor;
         @ActivationConfigProperty(propertyName = "singleConnection", propertyValue = "true")
 })
 @Slf4j
-public class SampleMdb extends BaseListener implements MessageListener {
+public class SampleMdb extends BaseListener {
 
     @EJB
     StringMessageProcessor messageProcessor;
 
-    @Override
-    public void onMessage(Message message) {
-        processMessage(message, messageProcessor);
-    }
 
+    @Override
+    public void process(StringMessage message) {
+        log.info("Received message: {}", message);
+        messageProcessor.processMessage(message);
+    }
 }

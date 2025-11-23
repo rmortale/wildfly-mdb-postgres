@@ -2,6 +2,7 @@ package org.wildfly.examples.mdb.util;
 
 import jakarta.jms.JMSException;
 import jakarta.jms.Message;
+import jakarta.jms.MessageListener;
 import jakarta.jms.TextMessage;
 import lombok.extern.slf4j.Slf4j;
 
@@ -10,15 +11,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
-public class BaseListener {
+public abstract class BaseListener implements MessageListener {
 
-    public void processMessage(Message msg, StringMessageProcessor messageProcessor) {
+    public abstract void process(StringMessage message);
+
+    @Override
+    public void onMessage(Message message) {
         try {
-            log.debug("Received JMS message with id: {}", msg.getJMSMessageID());
-            if (msg instanceof TextMessage) {
-                messageProcessor.processMessage(getTextMessage(msg));
+            log.debug("Received JMS message with id: {}", message.getJMSMessageID());
+            if (message instanceof TextMessage) {
+                process(getTextMessage(message));
             } else {
-                log.warn("Message of wrong type: {}", msg.getClass().getName());
+                log.warn("Message of wrong type: {}", message.getClass().getName());
             }
         } catch (JMSException e) {
             throw new RuntimeException(e);
