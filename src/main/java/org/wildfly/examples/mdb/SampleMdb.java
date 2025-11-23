@@ -14,18 +14,18 @@ import org.wildfly.examples.mdb.util.StringMessageProcessor;
         @ActivationConfigProperty(propertyName = "destination", propertyValue = "mdb.from.queue.01"),
         @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "jakarta.jms.Queue"),
         @ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge"),
-        @ActivationConfigProperty(propertyName = "maxSession", propertyValue = "10"),
+        @ActivationConfigProperty(propertyName = "maxSession", propertyValue = "2"),
         @ActivationConfigProperty(propertyName = "singleConnection", propertyValue = "true")
 })
 @Slf4j
-public class HelloWorld extends BaseListener implements MessageListener {
+public class SampleMdb extends BaseListener implements MessageListener {
 
     @EJB
     StringMessageProcessor messageProcessor;
 
-    public void onMessage(Message m) {
-        processMessage(m, messageProcessor);
+    @Override
+    public void onMessage(Message message) {
+        processMessage(message, messageProcessor);
     }
-
 
 }

@@ -12,23 +12,23 @@ import java.util.Map;
 @Slf4j
 public class BaseListener {
 
-    public void processMessage(Message m, StringMessageProcessor messageProcessor) {
+    public void processMessage(Message msg, StringMessageProcessor messageProcessor) {
         try {
-            log.debug("Received JMS message with id: {}", m.getJMSMessageID());
-            if (m instanceof TextMessage) {
-                messageProcessor.processMessage(getMessage((TextMessage) m));
+            log.debug("Received JMS message with id: {}", msg.getJMSMessageID());
+            if (msg instanceof TextMessage) {
+                messageProcessor.processMessage(getTextMessage(msg));
             } else {
-                log.warn("Message of wrong type: {}", m.getClass().getName());
+                log.warn("Message of wrong type: {}", msg.getClass().getName());
             }
         } catch (JMSException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public StringMessage getMessage(TextMessage m) throws JMSException {
+    private StringMessage getTextMessage(Message m) throws JMSException {
         return StringMessage.builder()
                 .messageId(m.getJMSMessageID())
-                .body(m.getText())
+                .body(((TextMessage) m).getText())
                 .headers(getHeaders(m))
                 .build();
     }
