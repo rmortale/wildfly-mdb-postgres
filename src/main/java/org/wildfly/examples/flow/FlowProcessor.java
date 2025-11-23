@@ -8,6 +8,8 @@ import org.wildfly.examples.mdb.util.StringMessage;
 import org.wildfly.examples.mdb.util.StringMessageProcessor;
 import org.wildfly.examples.repository.PersonRepository;
 
+import java.util.Map;
+
 @Stateless
 @Slf4j
 public class FlowProcessor implements StringMessageProcessor {
@@ -21,7 +23,7 @@ public class FlowProcessor implements StringMessageProcessor {
     public void processMessage(StringMessage message) {
         log.info("Processing Message {}", message);
         personRepository.createPerson(message.getMessageId(), message.getBody());
-        producer.sendMessage(message.getMessageId(), "producer.queue.01");
+        producer.sendMessageWithProps(message.getMessageId(), "producer.queue.01", Map.of("hello", "world"));
         //throw new NullPointerException("Message is null");
     }
 }

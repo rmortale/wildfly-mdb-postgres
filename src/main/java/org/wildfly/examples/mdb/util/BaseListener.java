@@ -14,6 +14,7 @@ public class BaseListener {
 
     public void processMessage(Message m, StringMessageProcessor messageProcessor) {
         try {
+            log.debug("Received JMS message with id: {}", m.getJMSMessageID());
             if (m instanceof TextMessage) {
                 messageProcessor.processMessage(getMessage((TextMessage) m));
             } else {
@@ -25,7 +26,6 @@ public class BaseListener {
     }
 
     public StringMessage getMessage(TextMessage m) throws JMSException {
-        log.debug("Received JMS message with id: {}", m.getJMSMessageID());
         return StringMessage.builder()
                 .messageId(m.getJMSMessageID())
                 .body(m.getText())
