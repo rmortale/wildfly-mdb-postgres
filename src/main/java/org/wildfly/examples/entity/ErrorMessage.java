@@ -7,6 +7,8 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.OffsetDateTime;
+
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 
@@ -24,5 +26,6 @@ public class ErrorMessage {
     private String errorMessage;
     @Column(length = 8192)
     private String exception;
+    private OffsetDateTime createDateTime;
 
 }

@@ -36,6 +36,7 @@ public abstract class BaseListener implements MessageListener {
     private StringMessage convertToStringMessage(Message m) throws JMSException {
         return StringMessage.builder()
                 .messageId(m.getJMSMessageID())
+                .timestamp(m.getJMSTimestamp())
                 .body(((TextMessage) m).getText())
                 .headers(getHeaders(m))
                 .build();

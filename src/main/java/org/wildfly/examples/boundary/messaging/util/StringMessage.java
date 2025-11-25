@@ -12,6 +12,7 @@ import java.util.Map;
 public class StringMessage {
 
     private final String messageId;
+    private final long timestamp;
     private final String body;
     private final Map<String, String> headers;
 }

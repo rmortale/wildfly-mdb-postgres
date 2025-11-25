@@ -10,27 +10,34 @@ import org.wildfly.examples.entity.ErrorMessage;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.time.OffsetDateTime;
 
 @Stateless
 public class ErrorRepository {
+
+    private static final int ERROR_MESSAGE_MAX_LENGTH = 8192;
 
     @PersistenceContext(unitName = "primary")
     private EntityManager em;
 
     public Long saveError(Message message, Exception exception) {
         ErrorMessage errorMessage = new ErrorMessage();
+        errorMessage.setCreateDateTime(OffsetDateTime.now());
         errorMessage.setErrorMessage(exception.getMessage());
         try {
             errorMessage.setMessage(((TextMessage) message).getText());
         } catch (JMSException e) {
             errorMessage.setMessage(e.getMessage());
         }
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(stringWriter);
-        exception.printStackTrace(printWriter);
-        errorMessage.setException(truncateString(stringWriter.toString(), 8192));
+        errorMessage.setException(stackTraceToString(exception));
         em.persist(errorMessage);
         return errorMessage.getId();
+    }
+
+    private String stackTraceToString(Exception ex) {
+        StringWriter stringWriter = new StringWriter();
+        ex.printStackTrace(new PrintWriter(stringWriter));
+        return truncateString(stringWriter.toString(), ERROR_MESSAGE_MAX_LENGTH);
     }
 
     private String truncateString(String string, int maxLength) {
