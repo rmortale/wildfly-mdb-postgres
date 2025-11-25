@@ -1,12 +1,12 @@
-package org.wildfly.examples.flow;
+package org.wildfly.examples.controller;
 
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import lombok.extern.slf4j.Slf4j;
-import org.wildfly.examples.mdb.util.AbortException;
-import org.wildfly.examples.mdb.util.Producer;
-import org.wildfly.examples.mdb.util.StringMessage;
-import org.wildfly.examples.repository.PersonRepository;
+import org.wildfly.examples.boundary.messaging.util.AbortException;
+import org.wildfly.examples.boundary.messaging.util.Producer;
+import org.wildfly.examples.boundary.messaging.util.StringMessage;
+import org.wildfly.examples.entity.repository.PersonRepository;
 
 import java.util.Map;
 

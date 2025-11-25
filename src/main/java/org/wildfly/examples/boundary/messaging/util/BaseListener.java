@@ -1,4 +1,4 @@
-package org.wildfly.examples.mdb.util;
+package org.wildfly.examples.boundary.messaging.util;
 
 import jakarta.jms.JMSException;
 import jakarta.jms.Message;

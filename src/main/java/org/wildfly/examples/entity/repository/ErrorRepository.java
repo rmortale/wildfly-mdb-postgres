@@ -1,4 +1,4 @@
-package org.wildfly.examples.repository;
+package org.wildfly.examples.entity.repository;
 
 import jakarta.ejb.Stateless;
 import jakarta.jms.JMSException;

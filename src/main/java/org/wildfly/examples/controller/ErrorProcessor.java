@@ -1,11 +1,11 @@
-package org.wildfly.examples.flow;
+package org.wildfly.examples.controller;
 
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.jms.Message;
 import lombok.extern.slf4j.Slf4j;
-import org.wildfly.examples.mdb.util.Producer;
-import org.wildfly.examples.repository.ErrorRepository;
+import org.wildfly.examples.boundary.messaging.util.Producer;
+import org.wildfly.examples.entity.repository.ErrorRepository;
 
 @Stateless
 @Slf4j

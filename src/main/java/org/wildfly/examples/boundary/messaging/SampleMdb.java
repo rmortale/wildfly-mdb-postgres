@@ -1,15 +1,15 @@
-package org.wildfly.examples.mdb;
+package org.wildfly.examples.boundary.messaging;
 
 import jakarta.ejb.ActivationConfigProperty;
 import jakarta.ejb.EJB;
 import jakarta.ejb.MessageDriven;
 import jakarta.jms.Message;
 import lombok.extern.slf4j.Slf4j;
-import org.wildfly.examples.flow.ErrorProcessor;
-import org.wildfly.examples.flow.FlowProcessor;
-import org.wildfly.examples.mdb.util.AbortException;
-import org.wildfly.examples.mdb.util.BaseListener;
-import org.wildfly.examples.mdb.util.StringMessage;
+import org.wildfly.examples.boundary.messaging.util.AbortException;
+import org.wildfly.examples.boundary.messaging.util.BaseListener;
+import org.wildfly.examples.boundary.messaging.util.StringMessage;
+import org.wildfly.examples.controller.ErrorProcessor;
+import org.wildfly.examples.controller.FlowProcessor;
 
 @MessageDriven(activationConfig = {
         @ActivationConfigProperty(propertyName = "useJNDI", propertyValue = "false"),

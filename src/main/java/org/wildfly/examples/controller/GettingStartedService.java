@@ -1,8 +1,8 @@
-package org.wildfly.examples;
+package org.wildfly.examples.controller;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.wildfly.examples.repository.PersonRepository;
+import org.wildfly.examples.entity.repository.PersonRepository;
 
 @ApplicationScoped
 public class GettingStartedService {
