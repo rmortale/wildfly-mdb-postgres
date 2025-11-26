@@ -1,4 +1,4 @@
-package org.wildfly.examples.entity.repository;
+package org.wildfly.examples.entity.error;
 
 import jakarta.ejb.Stateless;
 import jakarta.jms.JMSException;
@@ -6,7 +6,6 @@ import jakarta.jms.Message;
 import jakarta.jms.TextMessage;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import org.wildfly.examples.entity.ErrorMessage;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

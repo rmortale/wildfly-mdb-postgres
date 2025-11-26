@@ -1,9 +1,8 @@
-package org.wildfly.examples.entity.repository;
+package org.wildfly.examples.entity.person;
 
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import org.wildfly.examples.entity.Person;
 
 @Stateless
 public class PersonRepository {

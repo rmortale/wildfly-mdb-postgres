@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.wildfly.examples.boundary.messaging.util.AbortException;
 import org.wildfly.examples.boundary.messaging.util.Producer;
 import org.wildfly.examples.boundary.messaging.util.StringMessage;
-import org.wildfly.examples.entity.repository.PersonRepository;
+import org.wildfly.examples.entity.person.PersonRepository;
 
 import java.util.Map;
 

@@ -5,7 +5,7 @@ import jakarta.ejb.Stateless;
 import jakarta.jms.Message;
 import lombok.extern.slf4j.Slf4j;
 import org.wildfly.examples.boundary.messaging.util.Producer;
-import org.wildfly.examples.entity.repository.ErrorRepository;
+import org.wildfly.examples.entity.error.ErrorRepository;
 
 @Stateless
 @Slf4j

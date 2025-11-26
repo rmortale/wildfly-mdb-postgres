@@ -9,7 +9,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.wildfly.examples.controller.GettingStartedService;
-import org.wildfly.examples.entity.repository.PersonRepository;
+import org.wildfly.examples.entity.person.PersonRepository;
 
 @Path("/")
 public class GettingStartedEndpoint {

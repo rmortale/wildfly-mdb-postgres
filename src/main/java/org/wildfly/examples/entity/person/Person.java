@@ -1,4 +1,4 @@
-package org.wildfly.examples.entity;
+package org.wildfly.examples.entity.person;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

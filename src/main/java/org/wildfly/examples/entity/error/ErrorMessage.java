@@ -1,4 +1,4 @@
-package org.wildfly.examples.entity;
+package org.wildfly.examples.entity.error;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
