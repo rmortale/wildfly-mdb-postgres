@@ -15,14 +15,14 @@ public abstract class BaseListener implements MessageListener {
 
     public abstract void onError(Message message, Exception exception);
 
-    public abstract void process(StringMessage message) throws AbortException;
+    public abstract void onTextMessage(StringMessage message) throws AbortException;
 
     @Override
     public void onMessage(Message message) {
         try {
             log.debug("Received JMS message with id: {}", message.getJMSMessageID());
             if (message instanceof TextMessage) {
-                process(convertToStringMessage(message));
+                onTextMessage(convertToStringMessage(message));
             } else {
                 log.warn("Message of wrong type: {}", message.getClass().getName());
             }

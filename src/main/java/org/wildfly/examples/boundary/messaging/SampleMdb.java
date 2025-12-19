@@ -33,7 +33,7 @@ public class SampleMdb extends BaseListener {
     }
 
     @Override
-    public void process(StringMessage message) throws AbortException {
+    public void onTextMessage(StringMessage message) throws AbortException {
         messageProcessor.processMessage(message);
     }
 }
